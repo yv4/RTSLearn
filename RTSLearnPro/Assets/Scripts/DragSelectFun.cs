@@ -36,11 +36,10 @@ public class DragSelectFun : MonoBehaviour
     private void SetSoldiers()
     {
         if (Input.GetMouseButtonDown(0))
-
-        if(Input.GetMouseButtonDown(0))
         {
             m_LeftUpPoint = Input.mousePosition;
             m_IsMouseDown = true;
+
             if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition),
                                                                     out m_HitInfo,
                                                                          1000,
@@ -50,7 +49,7 @@ public class DragSelectFun : MonoBehaviour
             }
 
         }
-        else if(Input.GetMouseButtonUp(0))
+        else if (Input.GetMouseButtonUp(0))
         {
             m_IsMouseDown = false;
             m_Line.positionCount = 0;
@@ -59,7 +58,7 @@ public class DragSelectFun : MonoBehaviour
             SelectLaunch();
         }
 
-        if(m_IsMouseDown)
+        if (m_IsMouseDown)
         {
             m_LeftUpPoint.z = 5;
             m_RightDownPoint = Input.mousePosition;
