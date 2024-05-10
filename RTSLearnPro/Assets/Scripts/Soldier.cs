@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class Soldier : MonoBehaviour
 {
+    public GameObject SelObj;
+
+    private void Awake()
+    {
+        ShowSelect(false);
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -14,5 +21,10 @@ public class Soldier : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void ShowSelect(bool sel)
+    {
+        SelObj.gameObject.SetActive(sel);
     }
 }
