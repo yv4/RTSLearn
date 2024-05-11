@@ -14,9 +14,6 @@ public class DragSelectFun : MonoBehaviour
     private Vector3 m_BeginWorldPos;
     private Vector3 m_FrontPos = Vector3.zero;
 
-    public LayerMask HittableLayers;
-    public LayerMask SelectPlayerLayers;
-
     private RaycastHit m_HitInfo;
     private float m_SoldierOffset = 2;
     private List<Soldier> m_Soldiers = new List<Soldier>();
@@ -43,7 +40,8 @@ public class DragSelectFun : MonoBehaviour
             if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition),
                                                                     out m_HitInfo,
                                                                          1000,
-                                                            1<<LayerMask.NameToLayer("Ground")))
+                                                                1<<LayerMask.NameToLayer("Ground")
+                                                                         ))
             {
                 m_BeginWorldPos = m_HitInfo.point;
             }
@@ -94,7 +92,11 @@ public class DragSelectFun : MonoBehaviour
         {
             Vector3 center = new Vector3((m_HitInfo.point.x + m_BeginWorldPos.x) / 2, 1, (m_HitInfo.point.z + m_BeginWorldPos.z) / 2);
             Vector3 halfExtents = new Vector3(Mathf.Abs(m_HitInfo.point.x - m_BeginWorldPos.x) / 2, 1, Mathf.Abs(m_HitInfo.point.x - m_BeginWorldPos.x) / 2);
-            Collider[] colliders = Physics.OverlapBox(center, halfExtents,Quaternion.identity, 1<<LayerMask.NameToLayer("Player"));
+            Collider[] colliders = Physics.OverlapBox(center,
+                halfExtents,
+                Quaternion.identity,
+                1<<LayerMask.NameToLayer("Player")
+                );
             for (int i = 0; i < colliders.Length; i++)
             {
                 Soldier obj = colliders[i].GetComponent<Soldier>();
