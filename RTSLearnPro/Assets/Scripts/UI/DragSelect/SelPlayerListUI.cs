@@ -1,21 +1,29 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class SelPlayerListUI : MonoBehaviour
 {
     public Text SelIndexText;
 
-    // Start is called before the first frame update
-    void Start()
+    public ShowPlayerDetailEvent OnShowPlayerDetail;
+
+    public int DataIndex;
+
+
+    public void ShowPlayerDetail()
     {
-        
+        OnShowPlayerDetail.Invoke();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    #region Event
+
+    [Serializable]
+    public class ShowPlayerDetailEvent : UnityEvent
+    { }
+
+    #endregion
 }

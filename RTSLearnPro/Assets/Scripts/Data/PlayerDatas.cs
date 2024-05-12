@@ -12,6 +12,12 @@ public class PlayerDatas : MonoBehaviour
         {
             item.ShowSelect(false);
         }
+    }
 
+    public void ClearSelData()
+    {
+
+        ResetState();
+        CurrentSelPlayers.Clear();
     }
 }

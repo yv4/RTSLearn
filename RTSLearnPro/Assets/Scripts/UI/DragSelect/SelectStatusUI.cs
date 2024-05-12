@@ -7,18 +7,10 @@ using UnityEngine;
 public class SelectStatusUI : MonoBehaviour
 {
     public GameObject PlayerPrefab;
+    public GameObject UserStateContent;
+    public GameObject UserInfoContent;
+
     public Transform PlayerListContent;
-
-    private void Awake()
-    {
-        this.gameObject.SetActive(false);    
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
     // Update is called once per frame
     void Update()
@@ -26,29 +18,60 @@ public class SelectStatusUI : MonoBehaviour
         
     }
 
-    public void MultiPlayerSelectCallBack(PlayerDatas selData)
+    public void CancelSelectCallBack()
     {
-        this.gameObject.SetActive(true);
-
-        int index = 1;
+        this.gameObject.SetActive(false);
 
         foreach (Transform item in PlayerListContent)
         {
             GameObject.Destroy(item.gameObject);
         }
+    }
 
-        foreach (var item in selData.CurrentSelPlayers)
+    public void MultiPlayerSelectCallBack(PlayerDatas selData)
+    {
+        if(selData.CurrentSelPlayers.Count>0)
         {
-            GameObject player = GameObject.Instantiate<GameObject>(PlayerPrefab);
-            player.transform.SetParent(PlayerListContent.transform);
-            player.SetActive(true);
-            player.transform.localPosition = Vector3.zero;
-            player.transform.localScale = Vector3.one;
+          
+            this.gameObject.SetActive(true);
+            ResetLayout();
 
-            SelPlayerListUI selPlayerUI = player.GetComponent<SelPlayerListUI>();
-            selPlayerUI.SelIndexText.text = index.ToString();
-            index++;
+            int index = 1;
+
+            foreach (Transform item in PlayerListContent)
+            {
+                GameObject.Destroy(item.gameObject);
+            }
+
+            foreach (var item in selData.CurrentSelPlayers)
+            {
+                GameObject player = GameObject.Instantiate<GameObject>(PlayerPrefab);
+                player.transform.SetParent(PlayerListContent.transform);
+                player.SetActive(true);
+                player.transform.localPosition = Vector3.zero;
+                player.transform.localScale = Vector3.one;
+
+                SelPlayerListUI selPlayerUI = player.GetComponent<SelPlayerListUI>();
+                selPlayerUI.DataIndex = index-1;
+                selPlayerUI.SelIndexText.text = index.ToString();
+                index++;
+            }
         }
+        else
+        {
+            CancelSelectCallBack();
+        }
+    }
+
+    private void ResetLayout()
+    {
+        UserInfoContent.SetActive(false);
+        UserStateContent.SetActive(true);
+    }
+
+    public void ShowPlayerDetail()
+    {
+
     }
 
 }
