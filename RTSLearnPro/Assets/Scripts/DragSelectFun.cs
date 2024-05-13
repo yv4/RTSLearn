@@ -25,7 +25,7 @@ namespace DragSelect
 
         private RaycastHit m_HitInfo;
         private float m_SoldierOffset = 2;
-        private PlayerDatas m_SelData;
+        private SelPlayerDatas m_SelData;
         private LineRenderer m_Line;
 
         public SelectPlayersEvent OnPlayersSelect;
@@ -33,7 +33,7 @@ namespace DragSelect
 
         private void Awake()
         {
-            m_SelData = this.GetComponent<PlayerDatas>();    
+            m_SelData = this.GetComponent<SelPlayerDatas>();    
         }
 
         // Start is called before the first frame update
@@ -164,7 +164,7 @@ namespace DragSelect
         #region Event
 
         [Serializable]
-        public class SelectPlayersEvent : UnityEvent<PlayerDatas>
+        public class SelectPlayersEvent : UnityEvent<SelPlayerDatas>
         { }
 
         [Serializable]

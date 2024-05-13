@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerDatas : MonoBehaviour
+public class SelPlayerDatas : MonoBehaviour
 {
     public List<Soldier> CurrentSelPlayers = new List<Soldier>();
 

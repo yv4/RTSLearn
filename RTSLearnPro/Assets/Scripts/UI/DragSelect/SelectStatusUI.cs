@@ -28,7 +28,7 @@ public class SelectStatusUI : MonoBehaviour
         }
     }
 
-    public void MultiPlayerSelectCallBack(PlayerDatas selData)
+    public void MultiPlayerSelectCallBack(SelPlayerDatas selData)
     {
         if(selData.CurrentSelPlayers.Count>0)
         {
