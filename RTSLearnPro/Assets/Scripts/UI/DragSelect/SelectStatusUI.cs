@@ -1,4 +1,6 @@
+using Data;
 using DragSelect;
+using G13Kit;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -9,14 +11,11 @@ public class SelectStatusUI : MonoBehaviour
     public GameObject PlayerPrefab;
     public GameObject UserStateContent;
     public GameObject UserInfoContent;
-
     public Transform PlayerListContent;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public PlayerDetailUI m_PlayerDetailUI;
+
+    private const String TableName = "PlayerData";
 
     public void CancelSelectCallBack()
     {
@@ -36,7 +35,6 @@ public class SelectStatusUI : MonoBehaviour
             this.gameObject.SetActive(true);
             ResetLayout();
 
-            int index = 1;
 
             foreach (Transform item in PlayerListContent)
             {
@@ -45,6 +43,7 @@ public class SelectStatusUI : MonoBehaviour
 
             foreach (var item in selData.CurrentSelPlayers)
             {
+                int index = item.DataIndex;
                 GameObject player = GameObject.Instantiate<GameObject>(PlayerPrefab);
                 player.transform.SetParent(PlayerListContent.transform);
                 player.SetActive(true);
@@ -52,9 +51,8 @@ public class SelectStatusUI : MonoBehaviour
                 player.transform.localScale = Vector3.one;
 
                 SelPlayerListUI selPlayerUI = player.GetComponent<SelPlayerListUI>();
-                selPlayerUI.DataIndex = index-1;
                 selPlayerUI.SelIndexText.text = index.ToString();
-                index++;
+                selPlayerUI.Index = index;
             }
         }
         else
@@ -63,15 +61,18 @@ public class SelectStatusUI : MonoBehaviour
         }
     }
 
+    public void ShowPlayerDetailCallBack(int index)
+    {
+        PlayerData player = DataManager.Instance.GetDataFromTableById<PlayerData>(TableName, index);
+        m_PlayerDetailUI.SetContent(player.Name, player.HP);
+    }
+
+
     private void ResetLayout()
     {
         UserInfoContent.SetActive(false);
         UserStateContent.SetActive(true);
     }
 
-    public void ShowPlayerDetail()
-    {
-
-    }
 
 }

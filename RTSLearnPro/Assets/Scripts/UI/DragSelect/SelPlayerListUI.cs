@@ -1,3 +1,4 @@
+using Data;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -7,22 +8,20 @@ using UnityEngine.UI;
 
 public class SelPlayerListUI : MonoBehaviour
 {
+    public int Index;
     public Text SelIndexText;
 
     public ShowPlayerDetailEvent OnShowPlayerDetail;
 
-    public int DataIndex;
-
-
     public void ShowPlayerDetail()
     {
-        OnShowPlayerDetail.Invoke();
+        OnShowPlayerDetail.Invoke(Index);
     }
 
     #region Event
 
     [Serializable]
-    public class ShowPlayerDetailEvent : UnityEvent
+    public class ShowPlayerDetailEvent : UnityEvent<int>
     { }
 
     #endregion

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
@@ -48,33 +49,20 @@ namespace DragSelect
             SetSoldiers();
         }
 
+        public void GetDetailObj(int id)
+        {
+            m_SelData.ResetState();
+            var item = m_SelData.CurrentSelPlayers.FirstOrDefault<Soldier>(item=>item.DataIndex==id);
+            if(item!=null)
+            {
+                item.ShowSelect(true);
+            }
+        }
+
         private void SetSoldiers()
         {
             if (Input.GetMouseButtonDown(0))
             {
-            
-
-                //if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition),
-                //                                                      out m_HitInfo,
-                //                                                           1000,
-                //                                                  1 << LayerMask.NameToLayer(PlayerLayerName)
-                //                                                           ))
-                //{
-                //    m_LeftDownPoint = Vector3.zero;
-                //    m_IsMouseDown = false;
-                //    m_Line.positionCount = 0;
-                //    m_SingleSel = true;
-                //}
-                //else
-                //{
-                //    m_LeftDownPoint = Vector3.zero;
-                //    m_IsMouseDown = false;
-                //    Debug.Log("UnSelect");
-                //    m_SelData.ClearSelData();
-                //    OnCancelPlayerSelect.Invoke();
-                //    m_SingleSel = false;
-                //}
-
                 if (!m_SingleSel)
                 {
                     m_LeftUpPoint = Input.mousePosition;

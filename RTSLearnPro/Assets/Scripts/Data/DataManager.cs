@@ -101,6 +101,7 @@ namespace G13Kit
         [SerializeField]
         private List<DataFileItem> m_DataFiles;
 
+        private const string DefaultKey = "ID";
         private readonly Dictionary<string, JArray> m_Tables = new Dictionary<string, JArray>();
         private readonly Dictionary<Type, List<IData>> m_Datas = new Dictionary<Type, List<IData>>();
 
@@ -210,7 +211,25 @@ namespace G13Kit
             return m_Tables[name];
         }
 
-        public T GetDataFromTableById<T>(string tableName, int id, string idKey = "Id") where T : ProxyJObject
+        public void GetDataByID(string tableName, int id)
+        {
+            //if (string.IsNullOrEmpty(tableName) || !m_Tables.ContainsKey(tableName))
+            //{
+            //    throw new Exception(tableName + " is null");
+            //}
+
+            //var item = m_Tables[tableName].FirstOrDefault(i => i["ID"] != null && (int)i["ID"] == id);
+
+            //if (item == null)
+            //{
+            //    throw new Exception($"Data is null table: " + tableName + ", Id: " + id);
+            //}
+
+            //return (T)Activator.CreateInstance(typeof(T), item as JObject);
+            Debug.Log("GetDataByID");
+        }
+
+        public T GetDataFromTableById<T>(string tableName, int id, string idKey = DefaultKey) where T : ProxyJObject
         {
             if (string.IsNullOrEmpty(tableName) || !m_Tables.ContainsKey(tableName))
             {
@@ -227,7 +246,7 @@ namespace G13Kit
             return (T)Activator.CreateInstance(typeof(T), item as JObject);
         }
 
-        public bool TryGetDataFromTableById(string tableName, int id, out JObject jObj, string idKey = "Id")
+        public bool TryGetDataFromTableById(string tableName, int id, out JObject jObj, string idKey = DefaultKey)
         {
             jObj = null;
 
@@ -257,7 +276,7 @@ namespace G13Kit
             return true;
         }
 
-        public JObject GetDataFromTableById(string tableName, int id, string idKey = "Id")
+        public JObject GetDataFromTableById(string tableName, int id, string idKey = DefaultKey)
         {
             if (string.IsNullOrEmpty(tableName) || !m_Tables.ContainsKey(tableName))
             {

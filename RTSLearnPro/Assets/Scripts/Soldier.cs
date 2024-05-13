@@ -5,6 +5,7 @@ using UnityEngine;
 public class Soldier : MonoBehaviour
 {
     public GameObject SelObj;
+    public int DataIndex;
 
     private void Awake()
     {
