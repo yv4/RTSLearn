@@ -21,9 +21,6 @@ namespace DragSelect
         private Vector3 m_BeginWorldPos;
         private Vector3 m_FrontPos = Vector3.zero;
 
-        private const string GroundLayerName = "Ground";
-        private const string PlayerLayerName = "Player";
-
         private RaycastHit m_HitInfo;
         private float m_SoldierOffset = 2;
         private SelPlayerDatas m_SelData;
@@ -31,6 +28,7 @@ namespace DragSelect
 
         public SelectPlayersEvent OnPlayersSelect;
         public CancelSelectPlayersEvent OnCancelPlayerSelect;
+        public PlayersToDestinationEvent OnPlayerToDes;
 
         private void Awake()
         {
@@ -47,6 +45,7 @@ namespace DragSelect
         void Update()
         {
             SetSoldiers();
+            SoldierToDes();
         }
 
         public void GetDetailObj(int id)
@@ -56,6 +55,17 @@ namespace DragSelect
             if(item!=null)
             {
                 item.ShowSelect(true);
+            }
+        }
+
+        private void SoldierToDes()
+        {
+            if(Input.GetMouseButtonDown(1))
+            {
+                if (m_SelData.CurrentSelPlayers.Count <= 0)
+                    return;
+
+                OnPlayerToDes.Invoke(m_SelData.CurrentSelPlayers);
             }
         }
 
@@ -71,7 +81,7 @@ namespace DragSelect
                     if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition),
                                                                       out m_HitInfo,
                                                                            1000,
-                                                                  1 << LayerMask.NameToLayer(GroundLayerName)
+                                                                  1 << LayerMask.NameToLayer(GameConst.GroundLayerName)
                                                                            )
                         &&!EventSystem.current.IsPointerOverGameObject())
                     {
@@ -116,7 +126,7 @@ namespace DragSelect
             if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition),
                   out m_HitInfo,
                   1000,
-                 1 << LayerMask.NameToLayer(GroundLayerName))
+                 1 << LayerMask.NameToLayer(GameConst.GroundLayerName))
                  &&!EventSystem.current.IsPointerOverGameObject())
             {
                 if (m_SelData.CurrentSelPlayers != null)
@@ -131,7 +141,7 @@ namespace DragSelect
                     Collider[] colliders = Physics.OverlapBox(center,
                    halfExtents,
                    Quaternion.identity,
-                   1 << LayerMask.NameToLayer(PlayerLayerName)
+                   1 << LayerMask.NameToLayer(GameConst.PlayerLayerName)
                    );
                     for (int i = 0; i < colliders.Length; i++)
                     {
@@ -159,6 +169,9 @@ namespace DragSelect
         public class CancelSelectPlayersEvent : UnityEvent
         { }
 
+        [Serializable]
+        public class PlayersToDestinationEvent : UnityEvent<List<Soldier>>
+        { }
         #endregion
     }
 
