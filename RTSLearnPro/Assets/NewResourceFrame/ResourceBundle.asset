@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37e24d9d12cbc0c4fb5ebce2224d0c21, type: 3}
+  m_Name: ResourceBundle
+  m_EditorClassIdentifier: 
+  TestString: []
+  ResourceItems: []
+  BundlePath: Assets/Prefabs/Enemies/Chomper
+  BundleLable: Enemy
+  Group: {fileID: 11400000, guid: 6f1be5fd389eec34a821826fc073c47a, type: 2}
+  Settings: {fileID: 11400000, guid: 519f329156b0817479e8c27e19695eaf, type: 2}

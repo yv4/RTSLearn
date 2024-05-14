@@ -12,6 +12,9 @@ namespace BaseSystemFun
     {
         public Transform PlayerParent;
 
+        private string PrefabKey = "Assets/Prefabs/Enemies/Chomper/Chomper.prefab";
+        private string PrefabLabel = "Enemy";
+
         private void Awake()
         {
             SpawnPlayer();
@@ -36,7 +39,7 @@ namespace BaseSystemFun
             {
                 PlayerData data = item.As<PlayerData>();
     
-                GameObject prefab = Resources.Load<GameObject>("Chomper");
+                GameObject prefab = ResourceManager.Instance.LoadAddressableAssetByNameAndLabel<GameObject>(PrefabKey, PrefabLabel);
                 GameObject obj = GameObject.Instantiate(prefab);
                 obj.transform.SetParent(PlayerParent);
                 obj.transform.localScale = Vector3.one;
