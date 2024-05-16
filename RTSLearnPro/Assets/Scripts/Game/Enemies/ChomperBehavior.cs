@@ -16,10 +16,10 @@ public class ChomperBehavior : MonoBehaviour
     public static readonly int hashNearBase = Animator.StringToHash("NearBase");
     public static readonly int hashIdleState = Animator.StringToHash("ChomperIdle");
 
-    //public EnemyController controller { get { return m_Controller; } }
+    public EnemyController controller { get { return m_Controller; } }
     //public PlayerController target { get { return m_Target; } }
 
-    public Vector3 originalPosition { get; protected set; }
+    public Vector3 originalPosition { get; set; }
     [System.NonSerialized]
     public float attackDistance = 3;
 
@@ -28,19 +28,23 @@ public class ChomperBehavior : MonoBehaviour
 
     protected float m_TimerSinceLostTarget = 0.0f;
 
+    public Vector3 MoveTarget = Vector3.zero;
     //protected PlayerController m_Target = null;
-    //protected EnemyController m_Controller;
+    protected EnemyController m_Controller;
     //protected TargetDistributor.TargetFollower m_FollowerInstance = null;
 
     //public TargetDistributor.TargetFollower followerData { get { return m_FollowerInstance; } }
 
     protected void OnEnable()
     {
-        //m_Controller = GetComponentInChildren<EnemyController>();
-        originalPosition = transform.position;
+        m_Controller = GetComponentInChildren<EnemyController>();
+        originalPosition = transform.localPosition;
 
-        //m_Controller.animator.Play(hashIdleState, 0, Random.value);
-        //SceneLinkedSMB<ChomperBehavior>.Initialise(m_Controller.animator, this);
+        if(m_Controller!=null)
+        {
+            m_Controller.animator.Play(hashIdleState, 0, Random.value);
+            SceneLinkedSMB<ChomperBehavior>.Initialise(m_Controller.animator, this);
+        }
     }
 
     private void PlayStep(int frontFoot)
@@ -66,12 +70,18 @@ public class ChomperBehavior : MonoBehaviour
 
     private void FixedUpdate()
     {
-        //m_Controller.animator.SetBool(hashGrounded, controller.grounded);
+        if(m_Controller!=null)
+        m_Controller.animator.SetBool(hashGrounded, controller.grounded);
 
-        Vector3 toBase = originalPosition - transform.position;
+        Vector3 toBase = originalPosition - transform.localPosition;
         toBase.y = 0;
 
-        //m_Controller.animator.SetBool(hashNearBase, toBase.sqrMagnitude < 0.1 * 0.1f);
+        if(m_Controller!=null)
+        {
+            bool val = toBase.sqrMagnitude < 0.1 * 0.1f;;
+            m_Controller.animator.SetBool(hashNearBase, val);
+        }
+      
     }
 
     public void FindTarget()
@@ -135,7 +145,7 @@ public class ChomperBehavior : MonoBehaviour
         //    RequestTargetPosition();
         //}
 
-        //m_Controller.animator.SetBool(hashInPursuit, true);
+        m_Controller.animator.SetBool(hashInPursuit, true);
     }
 
     public void StopPursuit()
@@ -145,17 +155,16 @@ public class ChomperBehavior : MonoBehaviour
         //    m_FollowerInstance.requireSlot = false;
         //}
 
-        //m_Controller.animator.SetBool(hashInPursuit, false);
+        m_Controller.animator.SetBool(hashInPursuit, false);
+        MoveTarget = Vector3.zero;
     }
 
-    public void RequestTargetPosition()
+    public Vector3 RequestTargetPosition()
     {
-        //Vector3 fromTarget = transform.position - m_Target.transform.position;
-        //fromTarget.y = 0;
 
-        //m_FollowerInstance.requiredPoint = m_Target.transform.position + fromTarget.normalized * attackDistance * 0.9f;
+        return MoveTarget;
     }
-  
+
     public void WalkBackToBase()
     {
         //if (m_FollowerInstance != null)

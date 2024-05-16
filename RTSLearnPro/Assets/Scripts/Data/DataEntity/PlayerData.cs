@@ -40,9 +40,9 @@ namespace Data
 
         public Vector3 GetPos()
         {
-              string[] posVal = Pos.Split(';');
-                return new Vector3(float.Parse(posVal[0]), float.Parse(posVal[1]), float.Parse(posVal[2]));
-    }
+            string[] posVal = Pos.Split(';');
+            return new Vector3(float.Parse(posVal[0]), float.Parse(posVal[1]), float.Parse(posVal[2]));
+        }
     }
 }
 

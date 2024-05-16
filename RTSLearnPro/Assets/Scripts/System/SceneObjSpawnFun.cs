@@ -43,8 +43,9 @@ namespace BaseSystemFun
                 GameObject obj = GameObject.Instantiate(prefab);
                 obj.transform.SetParent(PlayerParent);
                 obj.transform.localScale = Vector3.one;
-                obj.transform.localPosition = data.GetPos();
+                obj.transform.position = data.GetPos();
                 obj.GetComponent<Soldier>().DataIndex = data.ID;
+                obj.GetComponent<ChomperBehavior>().originalPosition = data.GetPos();
             }
         }
     }

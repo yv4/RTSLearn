@@ -56,6 +56,9 @@ namespace DragSelect
             {
                 item.ShowSelect(true);
             }
+
+            m_SelData.CurrentSelPlayers.Clear();
+            m_SelData.CurrentSelPlayers.Add(item);
         }
 
         private void SoldierToDes()
@@ -75,7 +78,7 @@ namespace DragSelect
             {
                 if (!m_SingleSel)
                 {
-                    m_LeftUpPoint = Input.mousePosition;
+                     m_LeftUpPoint = Input.mousePosition;
                     m_IsMouseDown = true;
 
                     if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition),

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class NavPlayersFun : MonoBehaviour
 {
@@ -30,6 +31,8 @@ public class NavPlayersFun : MonoBehaviour
                     else return 1;
                 });
             }
+
+            GetTargetPos(m_HitInfo.point);
         }
     }
 
@@ -93,9 +96,11 @@ public class NavPlayersFun : MonoBehaviour
         m_FrontPos = targetPos;
 
         int index = 0;
-        foreach (var item in targetsPos)
+        foreach (var item in m_Solders)
         {
-            Players[index].transform.localPosition = item;
+            Debug.Log("TargetPos:" + "VexX:" + targetsPos[index]);
+            Players[index].transform.localPosition = targetsPos[index];
+            item.GetComponent<ChomperBehavior>().MoveTarget = targetsPos[index];
             index++;
         }
     }

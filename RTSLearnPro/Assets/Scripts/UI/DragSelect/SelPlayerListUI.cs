@@ -23,6 +23,5 @@ public class SelPlayerListUI : MonoBehaviour
     [Serializable]
     public class ShowPlayerDetailEvent : UnityEvent<int>
     { }
-
     #endregion
 }
