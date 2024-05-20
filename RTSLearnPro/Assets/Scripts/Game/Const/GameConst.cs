@@ -6,4 +6,5 @@ public class GameConst
 {
     public static string GroundLayerName = "Ground";
     public static string PlayerLayerName = "Player";
+    public static string EnemyLayerName = "Enemy";
 }

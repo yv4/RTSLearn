@@ -29,9 +29,9 @@ public class ChomperBehavior : MonoBehaviour
     protected float m_TimerSinceLostTarget = 0.0f;
 
     public Vector3 MoveTarget = Vector3.zero;
+
     //protected PlayerController m_Target = null;
     protected EnemyController m_Controller;
-    //protected TargetDistributor.TargetFollower m_FollowerInstance = null;
 
     //public TargetDistributor.TargetFollower followerData { get { return m_FollowerInstance; } }
 
@@ -148,16 +148,20 @@ public class ChomperBehavior : MonoBehaviour
         m_Controller.animator.SetBool(hashInPursuit, true);
     }
 
-    public void StopPursuit()
+    public void StopPursuit(bool stop=false)
     {
         //if(m_FollowerInstance!=null)
         //{
         //    m_FollowerInstance.requireSlot = false;
         //}
 
-        m_Controller.animator.SetBool(hashInPursuit, false);
+        m_Controller.animator.SetBool(hashInPursuit, stop);
+        m_Controller.navmeshAgent.enabled = false;
+        if(stop==false)
         MoveTarget = Vector3.zero;
+
     }
+
 
     public Vector3 RequestTargetPosition()
     {

@@ -35,13 +35,13 @@ public class EnemyController : MonoBehaviour
 
         m_NavMeshAgent.updatePosition = false;
 
-        m_Rigibody = GetComponentInChildren<Rigidbody>();
-        if (m_Rigibody == null)
-            m_Rigibody = gameObject.AddComponent<Rigidbody>();
+        //m_Rigibody = GetComponentInChildren<Rigidbody>();
+        //if (m_Rigibody == null)
+        //    m_Rigibody = gameObject.AddComponent<Rigidbody>();
 
-        m_Rigibody.isKinematic = true;
-        m_Rigibody.useGravity = false;
-        m_Rigibody.interpolation = RigidbodyInterpolation.Interpolate;
+        //m_Rigibody.isKinematic = true;
+        //m_Rigibody.useGravity = false;
+        //m_Rigibody.interpolation = RigidbodyInterpolation.Interpolate;
 
         m_FollowNavmeshAgent = true;
     }
@@ -66,6 +66,7 @@ public class EnemyController : MonoBehaviour
 
     private void ForceMovement()
     {
+        Debug.Log("ForceMove");
         if (m_ExternalForceAddGravity)
             return;
 

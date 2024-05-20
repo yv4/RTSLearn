@@ -23,6 +23,18 @@ MonoBehaviour:
     m_SerializedLabels:
     - Enemy
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9d32a74382854c043b3e485ebd75e84c
+    m_Address: Assets/Prefabs/Enemies/Chomper/Player.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Enemy
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b934ed2514900c34495196cb805d6169
+    m_Address: Assets/Prefabs/Enemies/Chomper/PlayerFin.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Enemy
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 519f329156b0817479e8c27e19695eaf, type: 2}
   m_SchemaSet:

@@ -52,11 +52,7 @@ public class ResourceManager : PrefabSingleton<ResourceManager>
 
         foreach(var setting in settings)
         {
-            foreach(string test in setting.TestString)
-            {
-                Debug.Log(test);
-            }
-
+ 
             foreach(var data in setting.ResourceItems)
             {
                 if(data.Name == name)
